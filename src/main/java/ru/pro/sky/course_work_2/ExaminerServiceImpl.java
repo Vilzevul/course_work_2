@@ -16,6 +16,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public Collection<Question> getQuestions(int amount) {
+        if (amount > questionService.gelAll().size()) throw new BadRequestException();
         Set<Question> questionSet = new HashSet<>();
         while (questionSet.size() < amount) {
             questionSet.add(questionService.getRandomQuestion());
